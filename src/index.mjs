@@ -4,9 +4,10 @@ import cookieParser from "cookie-parser";
 import session from "express-session";
 import { mockUser } from "./utils/constants.mjs";
 import passport from "passport";
-// import "./strategies/local-strategy.mjs"
+import "./strategies/local-strategy.mjs"
 import mongoose from "mongoose";
 import MongoStore from "connect-mongo";
+// import "./strategies/discord-strategy.mjs"
 
 const app = express();
 mongoose.connect("mongodb://127.0.0.1:27017/express_tutorial")
@@ -96,6 +97,12 @@ app.get(
 app.post("/api/auth", passport.authenticate("local"), (request, response) => {
   response.sendStatus(200);
 });
+
+app.get("/api/auth/discord", passport.authenticate("discord"));
+app.get("/api/auth/discord/redirect", passport.authenticate("discord"), (request, response) => {
+  response.sendStatus(200);
+})
+
 
 app.get("/api/auth/status", (request, response) => {
   console.log(`Inside /auth/status endpoint`);
