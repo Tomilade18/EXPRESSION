@@ -10,9 +10,7 @@ import MongoStore from "connect-mongo";
 // import "./strategies/discord-strategy.mjs"
 
 const app = express();
-mongoose.connect("mongodb://127.0.0.1:27017/express_tutorial")
-.then(() => console.log("Connected to Database"))
-.catch((err) => console.log(`Eror: ${err}`))
+mongoose.connect                      
 
 app.use(express.json());
 app.use(cookieParser("helloworld"));
